@@ -1,3 +1,30 @@
+const lemmaData = {
+    bewerten: {
+        it: "valutare",
+        en: "to evaluate",
+        level: "B2"
+    },
+    beurteilen: {
+        it: "giudicare",
+        en: "to judge",
+        level: "B2"
+    },
+    einschätzen: {
+        it: "stimare",
+        en: "to assess",
+        level: "B2"
+    },
+    einstufen: {
+        it: "classificare",
+        en: "to classify",
+        level: "B2"
+    },
+    klassifizieren: {
+        it: "classificare scientificamente",
+        en: "to classify systematically",
+        level: "B2"
+    }
+};
 const cy = cytoscape({
 
     container: document.getElementById("graph"),
