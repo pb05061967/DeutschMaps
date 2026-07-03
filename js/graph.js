@@ -64,3 +64,25 @@ setTimeout(() => {
     cy.fit();
     cy.center();
 }, 300);
+cy.on("tap", "node", function(evt) {
+    const node = evt.target;
+    const id = node.data("id");
+
+    const data = lemmaData[id];
+
+    const panel = document.getElementById("content");
+
+    if (!data) {
+        panel.innerHTML = `<div class="card"><b>${id}</b><br>Nessun dato disponibile</div>`;
+        return;
+    }
+
+    panel.innerHTML = `
+        <div class="card">
+            <h2>${id}</h2>
+            <p><b>🇮🇹</b> ${data.it}</p>
+            <p><b>🇬🇧</b> ${data.en}</p>
+            <p><b>Livello:</b> ${data.level}</p>
+        </div>
+    `;
+});
