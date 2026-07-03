@@ -19,24 +19,24 @@ const cy = cytoscape({
         {
             selector: "node",
             style: {
-                "label": "data(id)",
-
-                "color": "#ffffff",
-                "background-color": "#2563eb",
+                label: "data(id)",
 
                 "text-valign": "center",
                 "text-halign": "center",
 
-                "width": "label",
-                "height": "label",
-                "padding": "10px",
+                "background-color": "#2563eb",
+                "color": "#fff",
 
                 "shape": "round-rectangle",
+
+                "padding": "10px",
+                "width": "label",
+                "height": "label",
 
                 "font-size": "12px",
 
                 "text-wrap": "wrap",
-                "text-max-width": 120
+                "text-max-width": 140
             }
         },
 
@@ -52,6 +52,15 @@ const cy = cytoscape({
 
     layout: {
         name: "cose",
-        padding: 40
+        animate: true,
+        animationDuration: 600,
+        fit: true,
+        padding: 80
     }
 });
+
+// 🔥 FIX CRUCIALE: forza centratura dopo rendering
+setTimeout(() => {
+    cy.fit();
+    cy.center();
+}, 300);
