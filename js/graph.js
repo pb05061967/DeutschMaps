@@ -1,6 +1,14 @@
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
 
-    const lemmaData = {
+    console.log("APP STARTED");
+
+    const panel = document.getElementById("content");
+
+    if (!panel) {
+        console.error("❌ #content NON TROVATO nel DOM");
+    }
+
+    const data = {
         bewerten: { it: "valutare", en: "to evaluate", level: "B2" },
         beurteilen: { it: "giudicare", en: "to judge", level: "B2" },
         einschätzen: { it: "stimare", en: "to assess", level: "B2" },
@@ -54,40 +62,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
         layout: {
             name: "cose",
-            animate: true,
             fit: true,
             padding: 80
         }
     });
 
-    // 🔥 DEBUG: verifica che funzioni
-    console.log("Cytoscape caricato");
-
+    // 🔥 TEST ASSOLUTO
     cy.on("tap", "node", (evt) => {
+
         const id = evt.target.id();
 
-        console.log("CLICK:", id);
-
-        const data = lemmaData[id];
-
-        const panel = document.getElementById("content");
+        console.log("CLICK FUNZIONA:", id);
 
         if (!panel) {
-            console.error("Pannello NON trovato: #content");
+            alert("Pannello non trovato!");
             return;
         }
 
-        if (!data) {
-            panel.innerHTML = `<div class="card"><b>${id}</b><br>Nessun dato</div>`;
-            return;
-        }
+        const d = data[id];
 
         panel.innerHTML = `
-            <div class="card">
+            <div style="padding:10px;background:#111;border-radius:8px">
                 <h2>${id}</h2>
-                <p><b>🇮🇹</b> ${data.it}</p>
-                <p><b>🇬🇧</b> ${data.en}</p>
-                <p><b>Level:</b> ${data.level}</p>
+                <p>🇮🇹 ${d?.it ?? "—"}</p>
+                <p>🇬🇧 ${d?.en ?? "—"}</p>
+                <p>B2 level: ${d?.level ?? "—"}</p>
             </div>
         `;
     });
