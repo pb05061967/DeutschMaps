@@ -3,69 +3,55 @@ const cy = cytoscape({
     container: document.getElementById("graph"),
 
     elements: [
+        { data: { id: "bewerten" } },
+        { data: { id: "beurteilen" } },
+        { data: { id: "einschätzen" } },
+        { data: { id: "einstufen" } },
+        { data: { id: "klassifizieren" } },
 
-        { data:{ id:"bewerten"} },
-
-        { data:{ id:"beurteilen"} },
-
-        { data:{ id:"einschätzen"} },
-
-        { data:{ id:"einstufen"} },
-
-        { data:{ id:"klassifizieren"} },
-
-        { data:{ source:"bewerten", target:"beurteilen"} },
-
-        { data:{ source:"bewerten", target:"einschätzen"} },
-
-        { data:{ source:"bewerten", target:"einstufen"} },
-
-        { data:{ source:"einstufen", target:"klassifizieren"} }
-
+        { data: { source: "bewerten", target: "beurteilen" } },
+        { data: { source: "bewerten", target: "einschätzen" } },
+        { data: { source: "bewerten", target: "einstufen" } },
+        { data: { source: "einstufen", target: "klassifizieren" } }
     ],
 
-    style:[
-
+    style: [
         {
+            selector: "node",
+            style: {
+                "label": "data(id)",
 
-            selector:"node",
+                "color": "#ffffff",
+                "background-color": "#2563eb",
 
-            style:{
+                "text-valign": "center",
+                "text-halign": "center",
 
-                "label":"data(id)",
+                "width": "label",
+                "height": "label",
+                "padding": "10px",
 
-                "text-valign":"center",
+                "shape": "round-rectangle",
 
-                "text-halign":"center",
+                "font-size": "12px",
 
-                "background-color":"#1976d2",
-
-                "color":"white",
-
-                "font-size":"16px"
-
+                "text-wrap": "wrap",
+                "text-max-width": 120
             }
-
         },
 
         {
-
-            selector:"edge",
-
-            style:{
-
-                "width":2
-
+            selector: "edge",
+            style: {
+                "width": 2,
+                "line-color": "#334155",
+                "curve-style": "bezier"
             }
-
         }
-
     ],
 
-    layout:{
-
-        name:"cose"
-
+    layout: {
+        name: "cose",
+        padding: 40
     }
-
 });
