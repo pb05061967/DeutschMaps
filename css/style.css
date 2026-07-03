@@ -1,21 +1,69 @@
-body{font-family:Arial,sans-serif;margin:0}
-header{padding:1rem;background:#222;color:#fff}
-main{display:flex}
-#graph{flex:2;padding:1rem}
-#panel{flex:1;border-left:1px solid #ccc;padding:1rem}
-.node{display:inline-block;margin:.5rem;padding:.7rem 1rem;background:#e8eefc;cursor:pointer;border-radius:10px}
-#graph-container{
-
-height:80vh;
-
-width:100%;
-
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    background: #0f172a;
+    color: white;
 }
 
-#graph{
+/* HEADER */
+header {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 12px;
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
+}
 
-width:100%;
+#search {
+    width: 250px;
+    padding: 6px;
+    border-radius: 6px;
+    border: none;
+}
 
-height:100%;
+/* LAYOUT PRINCIPALE */
+main {
+    display: grid;
+    grid-template-columns: 75% 25%;
+    height: calc(100vh - 50px);
+}
 
+/* GRAFO */
+#graph-container {
+    position: relative;
+    overflow: hidden;
+}
+
+#graph {
+    width: 100%;
+    height: 100%;
+}
+
+/* NODI (IMPORTANTISSIMO: leggibilità) */
+.cy-node {
+    font-size: 14px;
+    padding: 6px 10px;
+    border-radius: 10px;
+    background: #1d4ed8;
+    color: white;
+    text-align: center;
+}
+
+/* PANNELLO */
+#panel {
+    border-left: 1px solid #1f2937;
+    padding: 12px;
+    overflow-y: auto;
+    background: #0b1220;
+}
+
+.card {
+    background: #111827;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
 }
