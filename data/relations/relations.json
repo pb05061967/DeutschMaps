@@ -1,0 +1,22 @@
+[
+  {
+    "from": "bewerten",
+    "to": "beurteilen",
+    "type": "synonym"
+  },
+  {
+    "from": "bewerten",
+    "to": "einschätzen",
+    "type": "near"
+  },
+  {
+    "from": "bewerten",
+    "to": "einstufen",
+    "type": "classification"
+  },
+  {
+    "from": "einstufen",
+    "to": "klassifizieren",
+    "type": "synonym"
+  }
+]
