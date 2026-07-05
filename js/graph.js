@@ -78,3 +78,41 @@ async function loadData(){
 }
 
 loadData();
+const searchInput = document.getElementById("search");
+
+function resetHighlight() {
+    cy.elements().removeClass("dim highlight");
+}
+
+function highlightNode(node) {
+    resetHighlight();
+
+    node.addClass("highlight");
+
+    node.neighborhood().addClass("highlight");
+
+    cy.elements().not(node).not(node.neighborhood()).addClass("dim");
+
+    cy.animate({
+        center: { eles: node },
+        duration: 600
+    });
+}
+
+searchInput.addEventListener("input", (e) => {
+
+    const value = e.target.value.trim().toLowerCase();
+
+    if (value === "") {
+        resetHighlight();
+        return;
+    }
+
+    const matched = cy.nodes().filter(n =>
+        n.id().toLowerCase().includes(value)
+    );
+
+    if (matched.length > 0) {
+        highlightNode(matched[0]);
+    }
+});
