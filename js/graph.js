@@ -1,3 +1,4 @@
+let cy;
 
 async function loadData(){
 
@@ -25,33 +26,10 @@ async function loadData(){
         });
     });
 
-    const cy = cytoscape({
+    cy = cytoscape({
         container: document.getElementById("graph"),
         elements,
-        style:[
-            {
-                selector:"node",
-                style:{
-                    label:"data(id)",
-                    "background-color":"#2563eb",
-                    "color":"#fff",
-                    "shape":"round-rectangle",
-                    "padding":"10px",
-                    "text-valign":"center",
-                    "text-halign":"center",
-                    "width":"label",
-                    "height":"label"
-                }
-            },
-            {
-                selector:"edge",
-                style:{
-                    "width":2,
-                    "line-color":"#334155",
-                    "curve-style":"bezier"
-                }
-            }
-        ],
+        style:[ /* invariato */ ],
         layout:{
             name:"cose",
             fit:true,
@@ -60,6 +38,7 @@ async function loadData(){
     });
 
     const panel = document.getElementById("content");
+    const searchInput = document.getElementById("search");
 
     cy.on("tap","node", async (evt)=>{
         const id = evt.target.id();
@@ -75,44 +54,42 @@ async function loadData(){
             </div>
         `;
     });
-}
 
-loadData();
-const searchInput = document.getElementById("search");
+    function resetHighlight() {
+        cy.elements().removeClass("dim highlight");
+    }
 
-function resetHighlight() {
-    cy.elements().removeClass("dim highlight");
-}
+    function highlightNode(node) {
+        resetHighlight();
 
-function highlightNode(node) {
-    resetHighlight();
+        node.addClass("highlight");
+        node.neighborhood().addClass("highlight");
 
-    node.addClass("highlight");
+        cy.elements().not(node).not(node.neighborhood()).addClass("dim");
 
-    node.neighborhood().addClass("highlight");
+        cy.animate({
+            center: { eles: node },
+            duration: 600
+        });
+    }
 
-    cy.elements().not(node).not(node.neighborhood()).addClass("dim");
+    searchInput.addEventListener("input", (e) => {
 
-    cy.animate({
-        center: { eles: node },
-        duration: 600
+        const value = e.target.value.trim().toLowerCase();
+
+        if (value === "") {
+            resetHighlight();
+            return;
+        }
+
+        const matched = cy.nodes().filter(n =>
+            n.id().toLowerCase().includes(value)
+        );
+
+        if (matched.length > 0) {
+            highlightNode(matched[0]);
+        }
     });
 }
 
-searchInput.addEventListener("input", (e) => {
-
-    const value = e.target.value.trim().toLowerCase();
-
-    if (value === "") {
-        resetHighlight();
-        return;
-    }
-
-    const matched = cy.nodes().filter(n =>
-        n.id().toLowerCase().includes(value)
-    );
-
-    if (matched.length > 0) {
-        highlightNode(matched[0]);
-    }
-});
+loadData();
