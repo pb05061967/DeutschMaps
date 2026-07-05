@@ -51,3 +51,11 @@ main{
     padding:10px;
     border-radius:8px;
 }
+.highlight {
+    background-color: #f59e0b !important;
+    color: black !important;
+}
+
+.dim {
+    opacity: 0.15;
+}
